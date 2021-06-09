@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_lab2/models/MainModel.dart';
+import 'package:mobile_lab2/pages/mainPage.dart';
+import 'package:mobile_lab2/pages/settings.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -42,6 +46,16 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Main'),
+                onTap: () {
+                  Provider.of<MainModel>(context, listen: false).isMainPage = true;
+                  Provider.of<MainModel>(context, listen: false).page = MainPage();
+                  Provider.of<MainModel>(context, listen: false).title = "";
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.announcement_rounded),
                 title: Text('About'),
                 onTap: () {
@@ -52,6 +66,9 @@ class MyDrawer extends StatelessWidget {
                 leading: Icon(Icons.settings),
                 title: Text('Settings'),
                 onTap: () {
+                  Provider.of<MainModel>(context, listen: false).isMainPage = false;
+                  Provider.of<MainModel>(context, listen: false).page = Settings();
+                  Provider.of<MainModel>(context, listen: false).title = "Налаштування";
                   Navigator.pop(context);
                 },
               ),
